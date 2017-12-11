@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AAG - Reverse your Mortgage</title>
+    <link href="style.css" rel='stylesheet'>
+    <script type="text/javascript">
+        function hidesections() {
+            document.getElementById('localage').style.display = 'none';
+            document.getElementById('owner').style.display = 'none';
+            HomeValue = document.getElementById('homevalue');
+            for (i = 50; i < 950; i++) {
+                option = document.createElement('option');
+                option.setAttribute('value', '$' + i + 'k-$' + (i + 49) + 'k');
+                option.innerHTML = '$' + i + 'k-$' + (i + 49) + 'k';
+                HomeValue.appendChild(option);
+                i=i+49
+            }
+            Mortgage = document.getElementById('mortvalue');
+            for (i = 50; i < 950; i++) {
+                option = document.createElement('option');
+                option.setAttribute('value', '$' + i + 'k-$' + (i + 49) + 'k');
+                option.innerHTML = '$' + i + 'k-$' + (i + 49) + 'k';
+                Mortgage.appendChild(option);
+                i = i + 49
+            }
+            homeownerage = document.getElementById('homeownerage');
+            for (i = 62; i <= 99; i++) {
+                option = document.createElement('option');
+                option.setAttribute('value', i);
+                option.innerHTML = i;
+                homeownerage.appendChild(option);
+            }
+            document.getElementById('phonenumber').addEventListener('input', function (e) {
+                var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+                e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+            });
+        }
+        function openNext() {
+            var hv = document.getElementById('homevalue').options[document.getElementById('homevalue').selectedIndex].value;
+            var mv = document.getElementById('mortvalue').options[document.getElementById('mortvalue').selectedIndex].value;
+            var zipID = document.getElementById('zipID').value;
+            var ho = document.getElementById('homeownerage').options[document.getElementById('homeownerage').selectedIndex].value;
+            var fn = document.getElementById('fullname').value;
+            var sa = document.getElementById('fulladdress').value;
+            var pn = document.getElementById('phonenumber').value;
+            if (mv != 0 && hv != 0 && zipID != '') {
+                document.getElementById('localage').style.display = 'block';
+                document.getElementById('mortage').style.display = 'none';
+            }
+            if (ho != 0 && fn != '' && sa != '') {
+                if (fn.indexOf(' ') > 1) {
+                    document.getElementById('localage').style.display = 'none';
+                    document.getElementById('owner').style.display = 'block';
+                    document.getElementById('next').value = 'Submit';
+                }
+            }
+            if (pn != '') {
+                form.submit();
+            }
+         }
+    </script>
+</head>
+<body onload="hidesections()">
+    <div class="main_cntr">
+        <header>Convert Your Home Equity Into <strong>Tax-Free Cash</strong> With a <br>Reverse Mortgage Loan</header>
+        <section>Get Your <strong>Free Reverse Mortgage Info Kit</strong> Now!</section>
+        <div style=""></div>
+        <div class="content">
+            <div class="space20"></div>
+            <div class="boxform">
+                <form action="">
+                    <div id="mortage">
+                        What's the estimated property value?
+                        <div class="space10"></div>
+                        <select name="homevalue" id="homevalue">
+                            <option value="0" selected>Select home value</option>
+                        </select>
+                        <br><br>
+                        What's your mortgage balance?
+                        <div class="space10"></div>
+                        <select name="mortvalue" id="mortvalue">
+                            <option value="0" selected>Select mortgage balance</option>
+                        </select>
+                        <br><br>
+                        What's the zip code for your property?
+                        <div class="space10"></div>
+                        <input type="text" id="zipID" name="zip" placeholder="Enter property zip" />
+                    </div>
+                    <div id="localage">
+                        What is the age of the homeowner on the title?
+                        <div class="space10"></div>
+                        <select name="homeownerage" id="homeownerage" onchange="openOwner();">
+                            <option value="0" selected>Please Select Age</option>
+                        </select>
+                        <br><br>
+                        What is your first and last name?
+                        <div class="space10"></div>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter First and Last Name" onchange="openOwner();" />
+                        <br><br>
+                        What is the property street address?
+                        <div class="space10"></div>
+                        <input type="text" id="fulladdress" name="fulladdress" placeholder="Enter your street address" onchange="openOwner();" />
+                    </div>
+                    <div id="owner">
+                        What is your phone number?<br>
+                        <span style="font-size: 8px;">Your phone number will help us make sure you live in the United States</span>
+                        <div class="space10"></div>
+                        <input type="text" id="phonenumber" name="phonenumber" placeholder="Enter your phone number" onchange="showSubmit();" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <center>
+            <input type="submit" value="Next" class="greenBtn" id="next" onclick="openNext()" />
+        </center>
+        <div class="space20"></div>
+        <hr>
+        <footer>
+            <p>&copy; 2017 American Advisors Group, All Rights Reserved NMLS# 9392 3800 W. Chapman Avenue. Orange, CA 92868</p>
+            <p> By prodviding the requested information and clicking "Submit", I provide my signature expressly consenting to contact from American Advisors Group or its subsidiaries, affiliates, or agents at the number I provided regarding products or services via live, automated or prerecorded telephone call, text message, or email. I understand that my telephone company may impose charges on me for these contacts, and I am not required to enter into this agreement as a condition of purchasing property, goods, or services. I understand that I can revoke this consent at any time. To speak with someone at American Advisores Group, please call 1-800-943-7925. Legal Information &#124; Privacy Policy
+        </footer>
+    </div>
+</body>
+</html>
